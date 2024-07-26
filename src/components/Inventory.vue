@@ -14,22 +14,31 @@
           draggable="true"
           @dragstart="dragStart($event, cell)"
           @dragend="dragend"
+          @click="openDeleteModal(cell.item.name)"
         >
           {{ cell.item.name }}
         </div>
       </div>
     </div>
+    <ModalDeleteItem 
+      :visible="deleteModalOpen"
+      :itemName="deleteItemName"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { useInventoryStore } from '../stores/inventory';
+import ModalDeleteItem from './ModalDeleteItem.vue'
 import { Cell } from '../ts/types/Cell';
 import { Item } from '../ts/types/Item';
+import { ref } from 'vue';
 
 const inventoryStore = useInventoryStore();
 
 let draggedItem: { cell: Cell; item: Item } | null = null;
+let deleteModalOpen = ref(false);
+let deleteItemName = ref('');
 
 const dragStart = (event: DragEvent, cell: Cell) => {
   if (cell.item) {
@@ -50,6 +59,10 @@ const drop = (event: DragEvent, targetCell: Cell) => {
     inventoryStore.updateCell(draggedItem.cell, undefined);
     draggedItem = null;
   }
+};
+const openDeleteModal = (itemName: string) => {
+  deleteItemName.value = itemName;
+  deleteModalOpen.value = true;
 };
 </script>
 

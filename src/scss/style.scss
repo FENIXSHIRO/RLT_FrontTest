@@ -1,5 +1,6 @@
 @use "sass-utils/variables";
 @use "components";
+@use "base";
 
 body{
   background-color: variables.$BgColor;

@@ -1,0 +1,8 @@
+@use "../sass-utils/variables";
+
+body {
+    color: white;
+}
+.hrline {
+    border-top: 1px solid variables.$BorderColor;
+}

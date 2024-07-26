@@ -1,6 +1,7 @@
 @use "../sass-utils/variables";
 
 .grid-container {
+  position: relative;
   background-color: variables.$SubBgColor;
   display: flex;
   overflow: hidden;

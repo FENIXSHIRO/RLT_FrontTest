@@ -1,1 +1,34 @@
 @use "../sass-utils/variables";
+
+.modalPanel {
+    position: absolute;
+    right: 0px;
+    backdrop-filter: blur(15px);
+    border: 1px solid variables.$BorderColor;
+    width: 45%;
+    height: 100%;
+    padding: 0px 15px;
+}
+.itemImageContainer {
+    height: 45%;
+}
+.textBlock {
+height: 35%;
+}
+.buttonBlock {
+    height: 10vh;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.close {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    border: 0px;
+    background-color: aqua;
+}

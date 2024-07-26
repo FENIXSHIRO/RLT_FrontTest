@@ -1,0 +1,15 @@
+@use "../sass-utils/variables";
+
+.deleteButton {
+    background-color: variables.$DeleteButtonColor;
+    border: 0px;
+    color: white;
+    border-radius: variables.$ButtonCornerRadius;
+    width: 220px;
+    height: 35px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: variables.$HoverDeleteButtonColor;
+    }
+}
