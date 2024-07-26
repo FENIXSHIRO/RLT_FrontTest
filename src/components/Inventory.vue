@@ -6,7 +6,7 @@
         :key="cell.id"
         class="grid-cell"
         @dragover.prevent
-        @drop="drop($event, cell)"
+        @drop="drop(cell)"
       >
         <div
           v-if="cell.item"
@@ -52,7 +52,7 @@ const dragend = (event: DragEvent) => {
   (event.target as HTMLDivElement).classList.remove('dragging');
 };
 
-const drop = (event: DragEvent, targetCell: Cell) => {
+const drop = (targetCell: Cell) => {
   if (targetCell.item) return;
   if (draggedItem && draggedItem.item) {
     inventoryStore.updateCell(targetCell, draggedItem.item);
