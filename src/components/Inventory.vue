@@ -1,6 +1,6 @@
 <template>
   <div class="grid-container">
-    <div v-for="row in grid" :key="row.id" class="grid-row">
+    <div v-for="row in inventoryStore.grid" :key="row.id" class="grid-row">
       <div
         v-for="cell in row.cells"
         :key="cell.id"
@@ -23,37 +23,11 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { useInventoryStore } from '../stores/inventory';
+import { Cell } from '../ts/types/Cell';
+import { Item } from '../ts/types/Item';
 
-type Item = {
-  name: string;
-}
-
-type Cell = {
-  id: number;
-  item?: Item;
-}
-
-type Row = {
-  id: number;
-  cells: Cell[];
-}
-
-const grid = reactive<Row[]>([]);
-
-for (let i = 0; i < 5; i++) {
-  const row: Row = {
-    id: i,
-    cells: []
-  };
-  for (let j = 0; j < 5; j++) {
-    row.cells.push({ id: i * 5 + j });
-  }
-  grid.push(row);
-}
-
-grid[0].cells[0].item = { name: 'Item 1' };
-grid[1].cells[1].item = { name: 'Item 2' };
+const inventoryStore = useInventoryStore();
 
 let draggedItem: { cell: Cell; item: Item } | null = null;
 
@@ -61,19 +35,19 @@ const dragStart = (event: DragEvent, cell: Cell) => {
   if (cell.item) {
     draggedItem = { cell, item: cell.item };
     event.dataTransfer?.setData('text', '');
-    (event.target as HTMLDivElement).classList.add('dragging')
+    (event.target as HTMLDivElement).classList.add('dragging');
   }
 };
 
 const dragend = (event: DragEvent) => {
-  (event.target as HTMLDivElement).classList.remove('dragging')
+  (event.target as HTMLDivElement).classList.remove('dragging');
 };
 
 const drop = (event: DragEvent, targetCell: Cell) => {
-  if (targetCell.item) return
+  if (targetCell.item) return;
   if (draggedItem && draggedItem.item) {
-    targetCell.item = draggedItem.item;
-    draggedItem.cell.item = undefined;
+    inventoryStore.updateCell(targetCell, draggedItem.item);
+    inventoryStore.updateCell(draggedItem.cell, undefined);
     draggedItem = null;
   }
 };
