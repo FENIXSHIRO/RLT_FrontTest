@@ -18,7 +18,7 @@
 <script setup lang="ts">
 import { defineProps, defineEmits } from 'vue';
 
-const props = defineProps<{
+const { itemName, visible } = defineProps<{
   itemName: string;
   visible: boolean;
 }>();
