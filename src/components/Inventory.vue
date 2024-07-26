@@ -10,9 +10,10 @@
       >
         <div
           v-if="cell.item"
-          class="grid-item"
+          :class="['grid-item',{ 'dragging': cell === draggedItem?.cell }]"
           draggable="true"
           @dragstart="dragStart($event, cell)"
+          @dragend="dragend"
         >
           {{ cell.item.name }}
         </div>
@@ -60,7 +61,12 @@ const dragStart = (event: DragEvent, cell: Cell) => {
   if (cell.item) {
     draggedItem = { cell, item: cell.item };
     event.dataTransfer?.setData('text', '');
+    (event.target as HTMLDivElement).classList.add('dragging')
   }
+};
+
+const dragend = (event: DragEvent) => {
+  (event.target as HTMLDivElement).classList.remove('dragging')
 };
 
 const drop = (event: DragEvent, targetCell: Cell) => {

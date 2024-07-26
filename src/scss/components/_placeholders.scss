@@ -1,0 +1,17 @@
+@use "../sass-utils/variables";
+
+.PanelContainer {
+    background-color: variables.$SubBgColor;
+    border: 1px solid variables.$BorderColor;
+    border-radius: variables.$PanelCornerRadius;
+    width: 300px;
+}
+
+.BottomPanelContainer {
+    margin: auto;
+    margin-top: 1vh;
+    background-color: variables.$SubBgColor;
+    border: 1px solid variables.$BorderColor;
+    border-radius: variables.$PanelCornerRadius;
+    height: 10vh;
+}

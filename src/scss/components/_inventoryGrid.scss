@@ -3,7 +3,11 @@
 .grid-container {
   background-color: variables.$SubBgColor;
   display: flex;
+  overflow: hidden;
   flex-direction: column;
+  border: 1px solid variables.$BorderColor;
+  border-radius: variables.$PanelCornerRadius;
+  width: fit-content;
 }
   
 .grid-row {
@@ -27,6 +31,6 @@
     background-color: variables.$SubBgHoverClolor;
   }
   &.dragging {
-    background-color: red;
+    border: 1px solid variables.$BorderColor;
   }
 }
