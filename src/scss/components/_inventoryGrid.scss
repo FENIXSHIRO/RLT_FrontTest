@@ -1,0 +1,20 @@
+@use "../sass-utils/variables";
+
+.grid-container {
+    background-color: variables.$SubBgColor;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .grid-row {
+    display: flex;
+  }
+  
+  .grid-cell {
+    width: 50px;
+    height: 50px;
+    border: 1px solid variables.$BorderColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
